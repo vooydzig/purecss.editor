@@ -1,0 +1,13 @@
+body, html { height: 100%; }
+div { 
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-color: white;
+}
+.layout {height: 100%; }
+.toolbar { background: #191818; color: red;}
+.content { height: 100% !important; border:2px solid black; overflow: auto; z-index: 1;}
+.row { z-index: 2; border-bottom: 1px solid black;}
+.box { border-right: 1px solid black; text-align: center; font-weight: bold; z-index:3; padding: 1.5em 0; }
+.box.active { background-color: rgba(0, 255, 0, 0.3) ; }
