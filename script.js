@@ -1,5 +1,22 @@
 $(document).ready(function() {
+    //inspiration: http://www.layoutit.com/build
     function isInt(n) { return (n%1 === 0); }
+
+    var TOOLBAR_CALLBACKS = {
+      'clear': function (e) {
+        $('.content').empty().show();
+        $('.code').hide();
+      },
+      'code': function(e) {
+        var data = $('.content').toggle().html();
+        $('.code').toggle().find('textarea').text(data);
+      },
+      'grid-add-row': function(e) {
+        $('.content').append('<div class="pure-g row"><div class="pure-u-24-24 box">24/24</div></div>');
+      },
+      'grid-split-cell': onCellSplit,
+      'grid-remove-cell': onCellRemove,
+    };
 
     $('.content').mousedown(function(e) {
         e.preventDefault();
@@ -12,6 +29,22 @@ $(document).ready(function() {
             setActiveElement($(e.target));
     });
 
+    $('.pure-menu-heading').click(function(e) {
+      $('.pure-menu-list').hide();
+      $('.pure-menu-heading').removeClass('active').find('i.fa').addClass('fa-caret-down');
+      $(this).find('i.fa').removeClass('fa-caret-down');
+      $(this).addClass('active').next().show();
+    });
+
+    $('.pure-menu-item').click(function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = $(this).find('a').attr('id');
+      TOOLBAR_CALLBACKS[id](e);
+      $('.pure-menu-item').removeClass('pure-menu-selected');
+      $(this).addClass('pure-menu-selected');
+    });
+
     function setActiveElement($element) {
         $('.active').removeClass('active');
         $element.addClass('active');
@@ -21,22 +54,29 @@ $(document).ready(function() {
         $element.toggleClass('active');
     }
 
-    $('#reset').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $('.content').empty();
-        $activeElement = null;
-    });
+    function onCellSplit(e) {
+      var activeElements = $('.active');
+      if (!activeElements.length)
+          return;
 
-    $('#add-row').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $('.content').append('<div class="pure-g row"><div class="pure-u-24-24 box">24/24</div></div>');
-    });
+      for (var i=0; i<activeElements.length; i++) {
+          var $activeElement = $(activeElements[i]);
+          var width = getElementWidth($activeElement);
+          if (width <= 1)
+              continue;
 
-    $('#split').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
+          var new_widths = [];
+          if (isInt(width/2))
+              new_widths = [width/2, width/2];
+          else
+              new_widths = [(width+1)/2, (width-1)/2];
+
+          $activeElement.removeClass('pure-u-'+width+'-24').addClass('pure-u-'+new_widths[0]+'-24').text(new_widths[0]+'/24');
+          $activeElement.after('<div class="pure-u-'+new_widths[1]+'-24 box">'+new_widths[1]+'/24</div>');
+      }
+    }
+
+    function onCellRemove(e) {
         var activeElements = $('.active');
         if (!activeElements.length)
             return;
@@ -44,36 +84,12 @@ $(document).ready(function() {
         for (var i=0; i<activeElements.length; i++) {
             var $activeElement = $(activeElements[i]);
             var width = getElementWidth($activeElement);
-            if (width <= 1)
-                continue;
-
-            var new_widths = [];
-            if (isInt(width/2))
-                new_widths = [width/2, width/2];
-            else
-                new_widths = [(width+1)/2, (width-1)/2];
-
-            $activeElement.removeClass('pure-u-'+width+'-24').addClass('pure-u-'+new_widths[0]+'-24').text(new_widths[0]+'/24');
-            $activeElement.after('<div class="pure-u-'+new_widths[1]+'-24 box">'+new_widths[1]+'/24</div>');
-        }
-    });
-
-    $('#remove').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var activeElements = $('.active');
-        if (!activeElements.length)
-            return;
-
-        for (var i=0; i<activeElements.length; i++) {
-            var $activeElement = $(activeElements[i]); 
-            var width = getElementWidth($activeElement);
             if (width == 24)
                 removeRow($activeElement);
             else
                 removeColumn($activeElement, width);
         }
-    });
+    }
 
     function removeRow($activeElement) {
         $activeElement.parent().remove();

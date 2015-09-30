@@ -6,8 +6,13 @@ div {
     background-color: white;
 }
 .layout {height: 100%; }
-.toolbar { background: #191818; color: red;}
-.content { height: 100% !important; border:2px solid black; overflow: auto; z-index: 1;}
+.toolbar { background: #191818; }
+.toolbar ul { display: none; border-bottom: 1px solid #777;}
+.toolbar span.active { color: white; border-top: 1px solid #777;}
+
+.content { height: 100% !important; overflow: auto; z-index: 1;}
+.code { display: none; }
+.code textarea { width: 100%; height: 100%; }
 .row { z-index: 2; border-bottom: 1px solid black;}
 .box { border-right: 1px solid black; text-align: center; font-weight: bold; z-index:3; padding: 1.5em 0; }
-.box.active { background-color: rgba(0, 255, 0, 0.3) ; }
+.box.active { background-color: #1f8dd6;  color:white; }
