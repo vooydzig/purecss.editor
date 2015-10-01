@@ -4,9 +4,14 @@
         <title>purecss.editor</title>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css">
         <link rel="stylesheet" href="style.css">
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="lib/beautify-html.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+        
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
@@ -21,7 +26,7 @@
             </ul>
             <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> grid</span>
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a id="grid-add-row" href="#" class="pure-menu-link"><i class="fa fa-th"></i> add row</a></li>
+                <li class="pure-menu-item"><a id="grid-add-row" href="#" class="pure-menu-link"><i class="fa fa-align-justify"></i> add row</a></li>
                 <li class="pure-menu-item"><a id="grid-split-cell" href="#" class="pure-menu-link"><i class="fa fa-columns"></i> split</a></li>
                 <li class="pure-menu-item"><a id="grid-remove-cell" href="#" class="pure-menu-link"><i class="fa fa-times"></i> remove</a></li>
                 <li class="pure-menu-item"><a id="grid-clear-cell" href="#" class="pure-menu-link"><i class="fa fa-times"></i> clear</a></li>
@@ -55,7 +60,7 @@
             </ul>
         </div>
         <div class="content pure-u-4-5"></div>
-        <div class="code pure-u-4-5"><textarea></textarea></div>
+        <div class="code pure-u-4-5"><pre><code class="html"></code></pre></div>
     </div>
     </body>
 </html>

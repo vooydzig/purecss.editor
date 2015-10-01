@@ -8,7 +8,7 @@ div {
 .layout {height: 100%; }
 .toolbar { background: #191818; }
 .toolbar ul { display: none; border-bottom: 1px solid #777;}
-.toolbar span.active { color: white; border-top: 1px solid #777;}
+.toolbar span.active { border-top: 1px solid #777;}
 
 .content { height: 100% !important; overflow: auto; z-index: 1;}
 .code { display: none; }

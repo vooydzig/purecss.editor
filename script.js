@@ -9,13 +9,16 @@ $(document).ready(function() {
       },
       'code': function(e) {
         var data = $('.content').toggle().html();
-        $('.code').toggle().find('textarea').text(data);
+        var $code = $('.code');
+        $code.toggle().find('code').text(formatCode(data));
+        hljs.highlightBlock($code[0]);
       },
       'grid-add-row': function(e) {
         $('.content').append('<div class="pure-g row"><div class="pure-u-24-24 box">24/24</div></div>');
       },
       'grid-split-cell': onCellSplit,
       'grid-remove-cell': onCellRemove,
+      'grid-clear-cell': function(e) { $('.active').text(''); }
     };
 
     $('.content').mousedown(function(e) {
@@ -40,9 +43,10 @@ $(document).ready(function() {
       e.preventDefault();
       e.stopPropagation();
       var id = $(this).find('a').attr('id');
-      TOOLBAR_CALLBACKS[id](e);
-      $('.pure-menu-item').removeClass('pure-menu-selected');
-      $(this).addClass('pure-menu-selected');
+      if (TOOLBAR_CALLBACKS[id])
+        TOOLBAR_CALLBACKS[id](e);
+      else
+        console.log('Not implemented yet!');
     });
 
     function setActiveElement($element) {
@@ -101,7 +105,6 @@ $(document).ready(function() {
             $elem = $activeElement.next();
         var elemWidth = getElementWidth($elem);
         $elem.removeClass('pure-u-'+elemWidth+'-24').addClass('pure-u-'+(elemWidth + width)+'-24').text((elemWidth + width)+'/24');
-
         $activeElement.remove();
     }
 
@@ -115,4 +118,16 @@ $(document).ready(function() {
         }
         return 0;
     }
+    
+    function formatCode(source) {
+        var opts = {
+            indent_size: 4,
+            indent_char: ' ',
+            end_with_newline: true,
+            wrap_line_length: 80,
+            indent_inner_html: true
+        };
+        return html_beautify(source, opts);
+    }
+    
 });
