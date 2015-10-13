@@ -9,58 +9,69 @@
         
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="lib/beautify-html.js"></script>
-        
+        <script src="lib/require.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
-        
+
         <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
     <div class="layout pure-g">
-        <div class="toolbar pure-menu pure-u-1-5">
-            <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> layout</span>
-            <ul class="pure-menu-list">
-              <li class="pure-menu-item"><a id="clear" href="#" class="pure-menu-link"><i class="fa fa-file-o"></i> clear</a></li>
-              <li class="pure-menu-item"><a id="code" href="#" class="pure-menu-link"><i class="fa fa-code"></i> view code</a></li>
-              <li class="pure-menu-item"><a id="download" href="#" class="pure-menu-link"><i class="fa fa-download"></i> download</a></li>
-              <li class="pure-menu-item"><a id="share" href="#" class="pure-menu-link"><i class="fa fa-share"></i> share</a></li>
-            </ul>
-            <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> grid</span>
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a id="grid-add-row" href="#" class="pure-menu-link"><i class="fa fa-align-justify"></i> add row</a></li>
-                <li class="pure-menu-item"><a id="grid-split-cell" href="#" class="pure-menu-link"><i class="fa fa-columns"></i> split row</a></li>
-                <li class="pure-menu-item"><a id="grid-remove-cell" href="#" class="pure-menu-link"><i class="fa fa-times"></i> remove selected</a></li>
-                <li class="pure-menu-item"><a id="grid-clear-cell" href="#" class="pure-menu-link"><i class="fa fa-times"></i> clear content</a></li>
-            </ul>
-            <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> forms</span>
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a id="form-inline" href="#" class="pure-menu-link">inline</a></li>
-                <li class="pure-menu-item"><a id="form-stacked" href="#" class="pure-menu-link">stacked</a></li>
-                <li class="pure-menu-item"><a id="form-aligned" href="#" class="pure-menu-link">aligned</a></li>
-            </ul>
-            <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> buttons</span>
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a id="btn-active" href="#" class="pure-menu-link">active</a></li>
-                <li class="pure-menu-item"><a id="btn-primary" href="#" class="pure-menu-link">primary</a></li>
-            </ul>
-
-            <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> tables</span>
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a id="tbl-default" href="#" class="pure-menu-link">default</a></li>
-                <li class="pure-menu-item"><a id="tbl-bordered" href="#" class="pure-menu-link">bordered</a></li>
-                <li class="pure-menu-item"><a id="tbl-horizontal" href="#" class="pure-menu-link">horizontal</a></li>
-                <li class="pure-menu-item"><a id="tbl-striped" href="#" class="pure-menu-link">striped</a></li>
-            </ul>
-
-            <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> menus</span>
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a id="menu-vertical" href="#" class="pure-menu-link">vertical</a></li>
-                <li class="pure-menu-item"><a id="menu-horizontal" href="#" class="pure-menu-link">horizontal</a></li>
-                <li class="pure-menu-item"><a id="menu-horizontal-scr" href="#" class="pure-menu-link">scrollable horizontal</a></li>
-                <li class="pure-menu-item"><a id="menu-vertical-scr" href="#" class="pure-menu-link">scrollable vertical</a></li>
-            </ul>
+        <div class="sidebar pure-u-1-5">
+            <h3><i class="fa fa-toggle-left"></i> Toolbar</h3>
+            <div class="toolbar pure-menu">
+              <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> layout</span>
+              <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a id="clear" href="#" class="pure-menu-link"><i class="fa fa-file-o"></i> clear</a></li>
+                <li class="pure-menu-item"><a id="code" href="#" class="pure-menu-link"><i class="fa fa-code"></i> view code</a></li>
+                <li class="pure-menu-item"><a id="share" href="#" class="pure-menu-link"><i class="fa fa-share"></i> share</a></li>
+              </ul>
+              <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> grid</span>
+              <ul class="pure-menu-list">
+                  <li class="pure-menu-item"><a id="grid-add-row" href="#" class="pure-menu-link"><i class="fa fa-align-justify"></i> add row</a></li>
+                  <li class="pure-menu-item"><a id="grid-split-cell" href="#" class="pure-menu-link"><i class="fa fa-columns"></i> split row</a></li>
+                  <li class="pure-menu-item"><a id="grid-remove-cell" href="#" class="pure-menu-link"><i class="fa fa-times"></i> remove selected</a></li>
+                  <li class="pure-menu-item"><a id="grid-clear-cell" href="#" class="pure-menu-link"><i class="fa fa-times"></i> clear content</a></li>
+              </ul>
+              <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> forms</span>
+              <ul class="pure-menu-list">
+                  <li class="pure-menu-item"><a id="add-form" href="#" class="pure-menu-link">add form</a></li>
+                  <li class="pure-menu-item"><a id="add-input" href="#" class="pure-menu-link">add input</a></li>
+              </ul>
+              <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> buttons</span>
+              <ul class="pure-menu-list">
+                  <li class="pure-menu-item"><a id="btn-active" href="#" class="pure-menu-link">active</a></li>
+                  <li class="pure-menu-item"><a id="btn-primary" href="#" class="pure-menu-link">primary</a></li>
+              </ul>
+              <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> tables</span>
+              <ul class="pure-menu-list">
+                  <li class="pure-menu-item"><a id="tbl-default" href="#" class="pure-menu-link">default</a></li>
+                  <li class="pure-menu-item"><a id="tbl-bordered" href="#" class="pure-menu-link">bordered</a></li>
+                  <li class="pure-menu-item"><a id="tbl-horizontal" href="#" class="pure-menu-link">horizontal</a></li>
+                  <li class="pure-menu-item"><a id="tbl-striped" href="#" class="pure-menu-link">striped</a></li>
+              </ul>
+              <span class="pure-menu-heading"><i class="fa fa-caret-down"></i> menus</span>
+              <ul class="pure-menu-list">
+                  <li class="pure-menu-item"><a id="menu-vertical" href="#" class="pure-menu-link">vertical</a></li>
+                  <li class="pure-menu-item"><a id="menu-horizontal" href="#" class="pure-menu-link">horizontal</a></li>
+                  <li class="pure-menu-item"><a id="menu-horizontal-scr" href="#" class="pure-menu-link">scrollable horizontal</a></li>
+                  <li class="pure-menu-item"><a id="menu-vertical-scr" href="#" class="pure-menu-link">scrollable vertical</a></li>
+              </ul>
+            </div>
+            <div class="properties">
+              <h3>Properties: <span class="active-element"></span></h3>
+              <div class="properties-main">
+                <form class="pure-form pure-form-stacked">
+                  <fieldset>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
         </div>
         <div class="content pure-u-4-5"></div>
-        <div class="code pure-u-4-5"><pre><code class="html"></code></pre></div>
+        <div class="code pure-u-4-5">
+          <pre><code class="html"></code></pre>
+        </div>
     </div>
     </body>
 </html>

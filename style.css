@@ -3,16 +3,24 @@ div {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    background-color: white;
 }
-.layout {height: 100%; }
+.layout { height: 100%; }
+
+.sidebar { background: #191818; }
+.sidebar h3 { color: #777; text-transform: uppercase; margin-left: 1em; }
 .toolbar { background: #191818; }
 .toolbar ul { display: none; border-bottom: 1px solid #777;}
 .toolbar span.menu-active { border-top: 1px solid #777;}
 
+.properties { border-top: 3px solid #777;}
+.properties input { border-radius: 0 !important; }
+.properties input:disabled { color: #000; }
+.properties label, .properties .property-name, .property-value { color: #777; }
+
 .content { height: 100% !important; overflow: auto; z-index: 1;}
 .code { display: none; }
 .code textarea { width: 100%; height: 100%; }
+
 .row { z-index: 2; border-bottom: 1px solid black;}
-.box { border-right: 1px solid black; z-index:3; padding: 1.5em 0; }
-.box.active { background-color: #1f8dd6;  color:white; }
+.box { background-color: white; border-right: 1px solid black; z-index:3; padding: 1.5em 0; }
+.active { background-color: #1f8dd6;  color:white; }
