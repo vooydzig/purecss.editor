@@ -6,6 +6,8 @@ define(['./toolbar'], function(toolbar) {
     });
 
     $(".content").mousedown(function (e) {
+      e.preventDefault();
+      e.stopPropagation();
       if (e.which !== 1)
         return;
       var $target = $(e.target);
