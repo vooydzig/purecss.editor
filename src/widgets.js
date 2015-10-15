@@ -1,4 +1,4 @@
-define(['./properties'], function(properties) {
+define(['./utils', './properties'], function(utils, properties) {
 
   var widgets = {  };
 
@@ -52,6 +52,7 @@ define(['./properties'], function(properties) {
       if (newVal === 'inline')
         return;
       $form.addClass('pure-form-'+newVal);
+      //TODO: change all inputs to control-groups when 'stacked' or 'aligned' is selected
     }
 
     function getWidget(type) {
@@ -67,17 +68,22 @@ define(['./properties'], function(properties) {
 
   (function() {
     widgets['input'] = {
-      build: function (type) {
-        var $input = getWidget(type);
-        $input.data('name', 'Input');
+      build: function (type, style) {
+        type = type || 'input';
+        style = style || 'inline';
+        var $input = getWidget(type, style);
+        $input.data('name', type + ' input');
+        $input.data('type', type);
+        $input.data('style', style);
         $input.data('is_selectable', true);
         $input.data('properties', [
-          new properties.ListProperty('type', ['text', 'password', 'select'], function(oldVal, newVal) {
+          new properties.ListProperty('type', ['text', 'password', 'select'], type, function(oldVal, newVal) {
             $input.data('type', newVal);
-            //TODO: replace ONE widget with anther
-            // possibly wrap $input in some div
-            $input.after(widgets['input'].build(newVal));
-            $input.remove();
+            utils.replaceWithOne($input, widgets['input'].build(newVal, $input.data.style));
+          }),
+          new properties.ListProperty('style', ['inline', 'group'], style, function(oldVal, newVal) {
+            $input.data('style', newVal);
+            utils.replaceWithOne($input, widgets['input'].build($input.data.type, newVal));
           })
         ]);
         return $input;
@@ -90,14 +96,22 @@ define(['./properties'], function(properties) {
       }
     };
 
-    function getWidget(type) {
+    function getWidget(type, style) {
+      style = style || 'inline';
+      if (style !== 'inline')
+        var $widget = $('<div class="pure-control-group"><label>'+type.toUpperCase()+'</label></div>');
+      else
+        $widget = $('');
+
       if (type === 'select')
-        return getSelect();
-      return getInput(type);
+        return $widget.append(getSelect());
+      else
+        return $widget.append(getInput(type));
+
     }
 
     function getInput(type) {
-      return $('<label>Input</label><input type="'+type+'" placeholder="'+type+' input" />');
+      return $('<input type="'+type+'" placeholder="'+type+' input" />');
     }
 
     function getSelect() {

@@ -14,8 +14,14 @@ define(function() {
     return 0;
   }
 
+  function replaceWithOne($srcElements, $target) {
+    $srcElements.not(':first').remove();
+    $srcElements.replaceWith($target);
+  }
+
   return {
     isInt: isInt,
-    getElementWidth: getElementWidth
+    getElementWidth: getElementWidth,
+    replaceWithOne: replaceWithOne
   }
 });

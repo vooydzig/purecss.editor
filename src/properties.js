@@ -60,8 +60,8 @@ define(function() {
   })();
 
 
-  function ListProperty(name, values, onUpdate) {
-    Property.call(this, name, values[0], onUpdate);
+  function ListProperty(name, values, active, onUpdate) {
+    Property.call(this, name, active, onUpdate);
     this.values = values;
   }
 
@@ -72,7 +72,8 @@ define(function() {
       var html = '<label for="' + this.name + '">' + this.name.toUpperCase() + '</label>';
       html += '<select class="pure-input-1"' + 'id="' + this.name + '">';
       for (var i=0; i<this.values.length; i++)
-        html += '<option value="'+this.values[i]+'" >'+this.values[i].toUpperCase()+'</option>';
+        html += '<option value="'+this.values[i]+'" ' + (this.value == this.values[i] ? 'selected': '')
+          + ' >'+this.values[i].toUpperCase()+'</option>';
       html += '</select>';
       return $(html);
     };
