@@ -7,10 +7,10 @@ div {
 .layout { height: 100%; }
 
 .sidebar { background: #191818; }
-.sidebar h3 { color: #777; text-transform: uppercase; margin-left: 1em; }
+.sidebar h3 { color: #777; text-transform: capitalize; margin-left: 1em; }
 .toolbar { background: #191818; }
-.toolbar ul { display: none; border-bottom: 1px solid #777;}
-.toolbar span.menu-active { border-top: 1px solid #777;}
+.toolbar ul { display: none; border-bottom: 1px solid #777; }
+.toolbar span.menu-active { border-top: 1px solid #777; }
 
 .properties { border-top: 3px solid #777;}
 .properties input { border-radius: 0 !important; }
@@ -23,4 +23,7 @@ div {
 
 .row { z-index: 2; border-bottom: 1px solid black;}
 .box { background-color: white; border-right: 1px solid black; z-index:3; padding: 1.5em 0; }
-.active { background-color: #1f8dd6;  color:white; }
+.active { background-color: #1f8dd6 !important;;  color:white !important;; }
+
+.pure-menu-link:focus, .pure-menu-link:hover{ background: none; font-weight: bold;}
+.pure-menu-heading { cursor: pointer; }
